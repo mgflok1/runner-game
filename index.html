@@ -16,28 +16,9 @@
 </head>
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/16/Stats.min.js"></script>
-    
-    <script>
-        // Инициализируем виджет
-        var stats = new Stats();
-        stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: пользовательские
-        document.body.appendChild(stats.dom);
-
-        // Ваш основной цикл анимации
-        function animate() {
-            stats.begin();
-
-            // === Здесь происходит логика вашей игры или отрисовка анимации ===
-
-            stats.end();
-            requestAnimationFrame(animate);
-        }
-
-        requestAnimationFrame(animate);
-    </script>
 
     <div id="desktop-overlay" class="fullscreen-alert">
-        <img src="assets/textures/qr.png" alt="Сканируйте QR код">
+        <img src="assets/textures/qr_code.png" alt="Сканируйте QR код">
     </div>
 
     <div id="orientation-overlay" class="fullscreen-alert">
