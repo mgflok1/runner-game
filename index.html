@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Street Sprinter</title>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="preload" href="assets/textures/grey-heart.png" as="image">
+    <link rel="preload" href="assets/textures/bg3.png" as="image">
+    <link rel="preload" href="assets/textures/red-heart.png" as="image">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/16/Stats.min.js"></script>
+    
+    <script>
+        // Инициализируем виджет
+        var stats = new Stats();
+        stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: пользовательские
+        document.body.appendChild(stats.dom);
+
+        // Ваш основной цикл анимации
+        function animate() {
+            stats.begin();
+
+            // === Здесь происходит логика вашей игры или отрисовка анимации ===
+
+            stats.end();
+            requestAnimationFrame(animate);
+        }
+
+        requestAnimationFrame(animate);
+    </script>
+
+    <div id="desktop-overlay" class="fullscreen-alert">
+        <img src="assets/textures/qr.png" alt="Сканируйте QR код">
+    </div>
+
+    <div id="orientation-overlay" class="fullscreen-alert">
+        <img src="assets/textures/rotate.png" alt="Поверните устройство">
+    </div>
+
+    <div id="game-container">
+        
+        <div id="loading" class="loading-screen">
+            <button id="btn-start-game" class="btn standalone-btn" style="display: none;">СТАРТ</button>
+            <div id="progress-wrapper" class="progress-wrapper-container">
+                <div class="loader-text" id="loader-text">Загрузка...</div>
+                <div class="progress-container">
+                    <div id="progress-bar" class="progress-bar"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="ui-layer">
+            <div id="hud-top" class="hud-top" style="display: none;">
+    
+                <div class="stats-row">
+                    <div class="score-box">
+                        <div class="score-content" id="score-content">
+                            <div class="score-icon"></div>
+                            <span id="score-display">0</span>
+                        </div>
+                    </div>
+                    <div class="score-box" style="border-color: #00E676;">
+                        <div class="score-content" id="dist-content">
+                            <span id="dist-display">0m</span>
+                        </div>
+                    </div>
+                </div> 
+                <div id="lives-display">
+                    <img src="assets/textures/red-heart.png" class="heart-icon" alt="Life">
+                    <img src="assets/textures/red-heart.png" class="heart-icon" alt="Life">
+                    <img src="assets/textures/red-heart.png" class="heart-icon" alt="Life">
+                </div>
+            
+            </div>
+
+            <button id="btn-pause" class="pause-btn" style="display: none;">II</button>
+
+            <div id="tutorial-layer" style="display: none;">
+                <img id="tut-img-left" class="tut-img" src="assets/textures/swipe-left.png" style="display:none;">
+                <img id="tut-img-right" class="tut-img" src="assets/textures/swipe-right.png" style="display:none;">
+                <img id="tut-img-up" class="tut-img" src="assets/textures/swipe-up.png" style="display:none;">
+                <img id="tut-img-down" class="tut-img" src="assets/textures/swipe-down.png" style="display:none;">
+            </div>
+
+            <div id="lane-left" class="lane-guide" style="display: none;"></div>
+            <div id="lane-center" class="lane-guide lane-active" style="display: none;"></div>
+            <div id="lane-right" class="lane-guide" style="display: none;"></div>
+        </div>
+        
+        <div id="pause-screen" class="pause-menu overlay-screen">
+            <div class="menu-panel">
+                <h2>ПАУЗА</h2>
+                <button id="btn-resume" class="btn">Продолжить</button>
+                <button id="btn-restart-pause" class="btn">Заново</button>
+                <button id="btn-exit" class="btn">Выход</button>
+            </div>
+        </div>
+
+        <div id="game-over-screen" class="game-over overlay-screen">
+            <div class="menu-panel">
+                <h1>GAME OVER</h1>
+                <div style="color:#FFD700; font-size: 32px; font-weight: bold; margin-top: 10px;">
+                    СЧЕТ: <span id="final-score">0</span>
+                </div>
+                <button id="btn-restart-death" class="btn" style="margin-top: 30px;">ИГРАТЬ СНОВА</button>
+            </div>
+        </div>
+
+        <div id="three-canvas"></div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>
